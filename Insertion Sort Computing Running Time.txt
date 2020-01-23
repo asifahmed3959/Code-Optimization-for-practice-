@@ -1,0 +1,36 @@
+https://www.hackerrank.com/challenges/runningtime/problem?h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the runningTime function below.
+def runningTime(arr):
+    runningTime = 0 
+    for i in range(1,len(arr)):
+        minValue = arr[i]
+        j = i-1
+        while j>=0 and minValue<arr[j]:
+            arr[j+1] = arr[j]
+            j-=1
+            runningTime+=1
+        if minValue!=arr[i]:
+            arr[j+1]=minValue
+    return runningTime
+
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input())
+
+    arr = list(map(int, input().rstrip().split()))
+
+    result = runningTime(arr)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

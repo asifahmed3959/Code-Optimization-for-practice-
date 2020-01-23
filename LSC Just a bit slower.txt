@@ -1,0 +1,41 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the commonChild function below.
+def commonChild(s1, s2):
+    a = [[0]*(len(s1)+1) for y in range(2)]
+    #q = []
+    for i in range(len(s1)):
+	prev = i%2
+        current = (i+1)%2
+        for j in range(len(s2)):
+            
+            if s1[i] == s2[j]:
+                a[current][j+1] =  a[prev][j] +1
+            elif a[prev][j+1]>a[current][j]:
+                a[current][j+1] = a[prev][j+1]
+            else:
+                a[current][j+1] = a[current][j]
+            
+    
+    return a[(i+1)%2][j+1]
+
+
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s1 = input()
+
+    s2 = input()
+
+    result = commonChild(s1, s2)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

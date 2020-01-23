@@ -1,0 +1,42 @@
+#Quick Sort
+#Also known as partition sort
+# we have to partition the array according to the pivot
+#The pivot must be shifted in the right place
+# pivot can be the starting value, the middle/median value or the last value
+#here we will take the first value as pivot
+
+def quicksort(a,l,r):
+    if l<r:
+        partiPivot = partition(a,l,r)
+        quicksort(a,l,partiPivot)
+        quicksort(a,partiPivot+1,r)
+
+#check if left< Right
+# partition/ pivot = (array,left,right) # find the value where we have partitioned it or got the value of the pivot
+#quicksort (array,0,partition)
+#quicksort (array,parition+1,end)
+
+def partition(a,p,q):
+#initialize the pivot value
+    pivot = a[p]
+    i = p
+    for j in range(p+1,q):
+        if a[j] <= pivot:
+            i+=1
+            swap(a,i,j)
+    swap(a,i,p)
+    return i
+
+
+#index+=1
+#swap index element with left element
+#swap with the pivot to fill it in the right position
+#return the index of the pivot
+def swap(a,i,j):
+    temp = a[i]
+    a[i] = a[j]
+    a[j] = temp
+#driver array
+a = [1,4,1,2,1,0,0,2,10]
+quicksort(a,0,len(a))
+print(*(a))
